@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #f8f5ff;
+  color: #2a0845;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 헤더 스타일 */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.title {
+  font-size: 2.2rem;
+  color: #6b11ff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: pulse-purple 1.5s infinite alternate;
+}
+
+.subtitle {
+  color: #7b2cbf;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* 입력창 구역 */
+.input-section {
+  background: #ffffff;
+  border: 2px solid #8a2be2;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.25);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.input-form {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.input-group {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-weight: bold;
+  color: #4a00e0;
+  font-size: 0.95rem;
+}
+
+.input-group input {
+  padding: 12px;
+  border: 2px solid #d8b4fe;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 13px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+  animation: alert-btn 2s infinite;
+}
+
+.submit-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+/* 출력창 2분할 레이아웃 */
+.output-section {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .output-section {
+    flex-direction: column;
+  }
+}
+
+.panel {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 450px;
+  border: 2px solid #c084fc;
+  box-shadow: 0 4px 12px rgba(107, 33, 168, 0.1);
+}
+
+.panel h2 {
+  color: #581c87;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #f3e8ff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.placeholder {
+  color: #a855f7;
+  text-align: center;
+  margin-top: 100px;
+  font-style: italic;
+}
+
+/* 타임테이블 리스트 (왼쪽) */
+.timetable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.timetable-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #faf5ff;
+  border-left: 5px solid #9333ea;
+  padding: 12px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.time-badge {
+  background: #7e22ce;
+  color: white;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.card-content .action {
+  font-weight: bold;
+  color: #3b0764;
+}
+
+.card-content .alarm-preview {
+  font-size: 0.85rem;
+  color: #be185d;
+  margin-top: 3px;
+}
+
+/* 설명 텍스트 (오른쪽) */
+.explanation-text {
+  line-height: 1.7;
+  color: #371b58;
+  font-size: 1.05rem;
+  white-space: pre-line;
+  background: #fdf4ff;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #f43f5e;
+}
+
+/* 긴급 팝업 모달 */
+.alarm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(88, 28, 135, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: flash-bg 0.5s infinite alternate;
+}
+
+.alarm-modal {
+  background: white;
+  border: 4px solid #dc2626;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
+}
+
+.alarm-modal h2 {
+  color: #dc2626;
+  margin-bottom: 15px;
+}
+
+.alarm-action {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1e1b4b;
+  margin-bottom: 10px;
+}
+
+.alarm-msg {
+  color: #be123c;
+  margin-bottom: 20px;
+}
+
+.alarm-modal button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* 애니메이션 */
+@keyframes pulse-purple {
+  from { text-shadow: 0 0 5px rgba(107, 33, 168, 0.2); }
+  to { text-shadow: 0 0 15px rgba(168, 85, 247, 0.8); }
+}
+
+@keyframes alert-btn {
+  0% { box-shadow: 0 0 0 0 rgba(219, 39, 119, 0.7); }
+  70% { box-shadow: 0 0 0 12px rgba(219, 39, 119, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(219, 39, 119, 0); }
+}
+
+@keyframes flash-bg {
+  from { background: rgba(88, 28, 135, 0.85); }
+  to { background: rgba(153, 27, 27, 0.85); }
+}

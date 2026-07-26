@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { db } from '../lib/firebase';
 import { 
   collection, 
@@ -16,7 +17,6 @@ export default function Board() {
   const [posts, setPosts] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
-  // Firestore에서 최신순으로 글 목록 실시간 불러오기
   useEffect(() => {
     const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
 
@@ -36,7 +36,6 @@ export default function Board() {
     return () => unsubscribe();
   }, []);
 
-  // 글 작성 및 Firestore 저장
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title.trim() || !content.trim()) {
@@ -70,9 +69,14 @@ export default function Board() {
       </Head>
 
       <div style={{ maxWidth: '800px', margin: '40px auto', padding: '0 20px', fontFamily: 'sans-serif' }}>
+        <nav style={{ marginBottom: '20px' }}>
+          <Link href="/" style={{ color: '#7c3aed', fontWeight: 'bold', textDecoration: 'none' }}>
+            ← 메인 알람 앱으로 돌아가기
+          </Link>
+        </nav>
+
         <h1 style={{ marginBottom: '20px', color: '#581c87' }}>📋 자유 게시판</h1>
 
-        {/* 게시글 입력 폼 */}
         <form onSubmit={handleSubmit} style={{ background: '#ffffff', padding: '20px', borderRadius: '8px', border: '2px solid #8a2be2', marginBottom: '30px' }}>
           <div style={{ marginBottom: '12px' }}>
             <input
@@ -109,7 +113,6 @@ export default function Board() {
           </button>
         </form>
 
-        {/* 게시글 목록 영역 (최신순) */}
         <div>
           <h2 style={{ fontSize: '1.2rem', marginBottom: '15px', color: '#371b58' }}>게시글 목록 ({posts.length})</h2>
           {posts.length === 0 ? (

@@ -16,7 +16,6 @@ body {
   margin: 0 auto;
 }
 
-/* 헤더 스타일 */
 .header {
   text-align: center;
   margin-bottom: 25px;
@@ -36,7 +35,6 @@ body {
   margin-top: 5px;
 }
 
-/* 입력창 구역 */
 .input-section {
   background: #ffffff;
   border: 2px solid #8a2be2;
@@ -98,7 +96,6 @@ body {
   transform: scale(1.02);
 }
 
-/* 출력창 2분할 레이아웃 */
 .output-section {
   display: flex;
   gap: 20px;
@@ -135,7 +132,6 @@ body {
   font-style: italic;
 }
 
-/* 타임테이블 리스트 (왼쪽) */
 .timetable-list {
   display: flex;
   flex-direction: column;
@@ -173,7 +169,6 @@ body {
   margin-top: 3px;
 }
 
-/* 설명 텍스트 (오른쪽) */
 .explanation-text {
   line-height: 1.7;
   color: #371b58;
@@ -185,7 +180,6 @@ body {
   border-left: 4px solid #f43f5e;
 }
 
-/* 긴급 팝업 모달 */
 .alarm-modal-overlay {
   position: fixed;
   top: 0;
@@ -239,7 +233,6 @@ body {
   cursor: pointer;
 }
 
-/* 애니메이션 */
 @keyframes pulse-purple {
   from { text-shadow: 0 0 5px rgba(107, 33, 168, 0.2); }
   to { text-shadow: 0 0 15px rgba(168, 85, 247, 0.8); }

@@ -1,30 +1,11 @@
-# DEADLINE EMERGENCY - 마감 임박 알람 앱
+# ⚡ DEADLINE EMERGENCY & FIRESTORE BOARD
 
-Vercel에 배포할 수 있는 Next.js 기반 프로젝트입니다.
+Gemini API 기반 마감 임박 알람 웹앱 및 Firebase Firestore 연동 게시판 통합 프로젝트입니다.
 
-## 실행 방법
+## 🛠️ 기능 목록
+1. **마감 임박 알람 앱 (`/`)**: 미루고 있는 작업과 마감 시간을 입력받아 Gemini API가 벼락치기 타임테이블 및 실행 지침 생성, 실시간 알림/경고음 출력
+2. **자유 게시판 (`/board`)**: Firebase Firestore 연동을 통해 작성 글을 DB에 저장하고 최신순으로 실시간 불러오기
 
-1. 압축 해제 후 디렉토리 이동:
-   ```bash
-   cd deadline-alarm-app
-   ```
-
-2. 패키지 설치:
-   ```bash
-   npm install
-   ```
-
-3. 환경 변수 설정 (`.env.local` 파일 생성):
-   ```
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-
-4. 개발 서버 실행:
-   ```bash
-   npm run dev
-   ```
-
-## Vercel 배포 방법
-1. GitHub 저장소에 소스 코드를 올립니다.
-2. Vercel에서 프로젝트를 연결합니다.
-3. Environment Variables에 `GEMINI_API_KEY` 환경 변수를 추가합니다.
+## 🚀 설정 방법
+1. `src/lib/firebase.js` 파일에서 `firebaseConfig` 객체에 Firebase 웹 설정값을 입력합니다.
+2. Vercel 배포 시 `GEMINI_API_KEY` 환경 변수를 설정합니다.

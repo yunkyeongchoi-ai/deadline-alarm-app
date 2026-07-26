@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   const [task, setTask] = useState('');
@@ -9,24 +10,21 @@ export default function Home() {
   const [activeAlarm, setActiveAlarm] = useState(null);
   const [notifiedTimes, setNotifiedTimes] = useState([]);
 
-  // 웹 알림 권한 요청
   useEffect(() => {
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission();
     }
   }, []);
 
-  // 타임테이블 기반 실시간 알림 스케줄러 (1초마다 체크)
   useEffect(() => {
     if (!result || !result.timetable) return;
 
     const interval = setInterval(() => {
       const now = new Date();
-      const currentHHMM = now.toTimeString().slice(0, 5); // "HH:MM"
+      const currentHHMM = now.toTimeString().slice(0, 5);
 
       result.timetable.forEach((item) => {
         if (item.time === currentHHMM && !notifiedTimes.includes(item.time)) {
-          // 알림 실행
           triggerAlarm(item);
           setNotifiedTimes((prev) => [...prev, item.time]);
         }
@@ -39,25 +37,22 @@ export default function Home() {
   const triggerAlarm = (item) => {
     setActiveAlarm(item);
 
-    // 브라우저 데스크톱 알림
     if ('Notification' in window && Notification.permission === 'granted') {
       new Notification('🚨 [마감 임박 긴급 알림]', {
         body: `${item.time} - ${item.action}\n${item.alarmMessage}`,
-        icon: '/favicon.ico',
       });
     }
 
-    // 경고음 재생
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = ctx.createOscillator();
       osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(880, ctx.currentTime); // A5 tone
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
       osc.connect(ctx.destination);
       osc.start();
       osc.stop(ctx.currentTime + 0.8);
     } catch (e) {
-      console.log('Audio Context error:', e);
+      console.log('Audio error:', e);
     }
   };
 
@@ -95,7 +90,12 @@ export default function Home() {
       </Head>
 
       <div className="container">
-        {/* 상단 팝업 알람 Modal */}
+        <nav style={{ textAlign: 'right', marginBottom: '10px' }}>
+          <Link href="/board" style={{ color: '#7c3aed', fontWeight: 'bold', textDecoration: 'none' }}>
+            📋 게시판 바로가기 →
+          </Link>
+        </nav>
+
         {activeAlarm && (
           <div className="alarm-modal-overlay">
             <div className="alarm-modal">
@@ -112,14 +112,13 @@ export default function Home() {
           <p className="subtitle">더 이상 미룰 시간이 없습니다. AI가 초단위 타임테이블을 강제로 집행합니다.</p>
         </header>
 
-        {/* 1. 상단 입력창 */}
         <section className="input-section">
           <form onSubmit={handleSubmit} className="input-form">
             <div className="input-group">
               <label>미루고 있는 작업</label>
               <input
                 type="text"
-                placeholder="예: 보고서 작성, 코딩 과제 제출, 발표 자료 제작"
+                placeholder="예: 보고서 작성, 코딩 과제 제출"
                 value={task}
                 onChange={(e) => setTask(e.target.value)}
                 required
@@ -140,9 +139,7 @@ export default function Home() {
           </form>
         </section>
 
-        {/* 2. 하단 2분할 출력창 */}
         <main className="output-section">
-          {/* 왼쪽: 타임테이블 */}
           <div className="panel left-panel">
             <h2>⏳ 긴급 타임테이블</h2>
             {!result ? (
@@ -164,7 +161,6 @@ export default function Home() {
             )}
           </div>
 
-          {/* 오른쪽: 텍스트 설명 */}
           <div className="panel right-panel">
             <h2>🚨 벼락치기 실행 지침</h2>
             {!result ? (
